@@ -63,4 +63,8 @@ public class Restaurant {
         return name;
     }
 
+    public int calculateItemsCost(List<String> items) {
+        int cost = 0;
+        return cost;
+    }
 }

@@ -4,12 +4,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 class RestaurantTest {
 
     Restaurant restaurant;
+    List<String> items;
 
     @BeforeEach
     public void setup() {
@@ -18,6 +22,8 @@ class RestaurantTest {
         restaurant = new Restaurant("Amelie's cafe", "Chennai", openingTime, closingTime);
         restaurant.addToMenu("Sweet corn soup", 119);
         restaurant.addToMenu("Vegetable lasagne", 269);
+        items = new ArrayList<String>();
+        items.add("Vegetable lasagne");
     }
 
     //>>>>>>>>>>>>>>>>>>>>>>>>>OPEN/CLOSED<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
@@ -63,4 +69,21 @@ class RestaurantTest {
                 () -> restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //<<<<<<<<<<<<<<<<<<<<<<< Calculating Order Value >>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+
+    @Test
+    public void calulate_items_cost_on_selected_items_should_return_cost_greater_than_0() {
+        int totalCost = restaurant.calculateItemsCost(items);
+        assertTrue(totalCost>0);
+    }
+    @Test
+    public void calulate_items_cost_of_selected_items_should_return_cost_269() {
+        int totalCost = restaurant.calculateItemsCost(items);
+        assertEquals(269,totalCost);
+    }
+
+
+
 }
