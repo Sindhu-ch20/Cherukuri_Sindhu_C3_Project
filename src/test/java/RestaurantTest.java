@@ -72,7 +72,6 @@ class RestaurantTest {
 
     //<<<<<<<<<<<<<<<<<<<<<<< Calculating Order Value >>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
-
     @Test
     public void calulate_items_cost_on_selected_items_should_return_cost_greater_than_0() {
         int totalCost = restaurant.calculateItemsCost(items);
@@ -84,6 +83,33 @@ class RestaurantTest {
         assertEquals(269,totalCost);
     }
 
+    @Test
+    public void calulate_items_cost_with_no_items_selected_should_return_cost_0() {
+        List<String> items_ = new ArrayList<String>();
+        int totalCost = restaurant.calculateItemsCost(items_);
+        assertEquals(0,totalCost);
+    }
 
+    @Test
+    public void calulate_items_cost_on_selecting_new_item_should_return_cost_388() {
+        items.add("Sweet corn soup");
+        int totalCost = restaurant.calculateItemsCost(items);
+        assertEquals(388,totalCost);
+    }
+
+    @Test
+    public void calulate_items_cost_on_unselecting_item_should_return_cost_119() {
+        items.add("Sweet corn soup");
+        items.remove("Vegetable lasagne");
+        int totalCost = restaurant.calculateItemsCost(items);
+        assertEquals(119,totalCost);
+    }
+
+    @Test
+    public void calulate_items_cost_on_unselecting_all_item_should_return_cost_0() {
+        items.clear();
+        int totalCost = restaurant.calculateItemsCost(items);
+        assertEquals(0,totalCost);
+    }
 
 }
